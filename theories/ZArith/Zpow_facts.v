@@ -8,8 +8,9 @@
 (*         *     (see LICENSE file for the text of the license)         *)
 (************************************************************************)
 
-From Stdlib Require Import BinInt Znat ZArithRing Lia Wf_Z Zcomplements Zdiv Znumtheory.
+From Stdlib Require Import BinInt Znat ZArithRing Lia Wf_Z Zcomplements Zdiv Zdivisibility.
 From Stdlib Require Export Zpower.
+From Stdlib Require Znumtheory.
 Local Open Scope Z_scope.
 
 (** Properties of the power function over [Z] *)
@@ -169,38 +170,28 @@ Proof.
   rewrite Z.mul_comm, <- Z.pow_succ_r by lia; f_equal; lia.
 Qed.
 
+#[deprecated(use=Z.coprime_pow_r, since="9.1")]
 Theorem rel_prime_Zpower_r i p q :
- 0 <= i -> rel_prime p q -> rel_prime p (q^i).
+ 0 <= i -> Znumtheory.rel_prime p q -> Znumtheory.rel_prime p (q^i).
 Proof.
-  intros Hi Hpq; pattern i; apply natlike_ind; auto with zarith.
-  - simpl. apply rel_prime_sym, rel_prime_1.
-  - clear i Hi. intros i Hi Rec; rewrite Z.pow_succ_r; auto.
-    apply rel_prime_mult; auto.
+  setoid_rewrite Znumtheory.rel_prime_iff_coprime.
+  apply Z.coprime_pow_r.
 Qed.
 
+#[deprecated(use=Z.coprime_pow_l, since="9.1")]
 Theorem rel_prime_Zpower i j p q :
- 0 <= i ->  0 <= j -> rel_prime p q -> rel_prime (p^i) (q^j).
+ 0 <= i ->  0 <= j -> Znumtheory.rel_prime p q -> Znumtheory.rel_prime (p^i) (q^j).
 Proof.
- intros Hi Hj H. apply rel_prime_Zpower_r; trivial.
- apply rel_prime_sym. apply rel_prime_Zpower_r; trivial.
- now apply rel_prime_sym.
+  setoid_rewrite Znumtheory.rel_prime_iff_coprime.
+  intros. apply Z.coprime_pow_l; try apply Z.coprime_pow_r; trivial.
 Qed.
 
+Import Znumtheory.
+
+#[deprecated(use=Z.divide_prime_pp, since="9.1")]
 Theorem prime_power_prime p q n :
  0 <= n -> prime p -> prime q -> (p | q^n) -> p = q.
-Proof.
-  intros Hn Hp Hq; pattern n; apply natlike_ind; auto; clear n Hn.
-  - simpl; intros.
-    assert (2<=p) by (apply prime_ge_2; auto).
-    assert (p<=1) by (apply Z.divide_pos_le; auto with zarith).
-    lia.
-  - intros n Hn Rec.
-    rewrite Z.pow_succ_r by trivial. intros H.
-    assert (2<=p) by (apply prime_ge_2; auto).
-    assert (2<=q) by (apply prime_ge_2; auto).
-    destruct prime_mult with (2 := H); auto.
-    apply prime_div_prime; auto.
-Qed.
+Proof. rewrite <-!prime_alt; eauto using Z.divide_prime_pp. Qed.
 
 Theorem Zdivide_power_2 x p n :
  0 <= n -> 0 <= x -> prime p -> (x | p^n) -> exists m, x = p^m.
@@ -213,7 +204,7 @@ Proof.
     Z.le_elim Hx; subst.
     + (* x > 1 *)
       case (prime_dec x); intros Hpr.
-      * exists 1; rewrite Z.pow_1_r; apply prime_power_prime with n; auto.
+      * exists 1; rewrite Z.pow_1_r. eapply Z.divide_prime_pp; rewrite ?prime_alt; eauto.
       * case not_prime_divide with (2 := Hpr); auto.
         intros p1 ((Hp1, Hpq1),(q1,->)).
         assert (Hq1 : 0 < q1) by (apply Z.mul_lt_mono_pos_r with p1; lia).
@@ -237,5 +228,7 @@ Qed.
 
 (** * Z.square: a direct definition of [z^2] *)
 
+#[deprecated(use=Pos.square_spec, since="9.1")]
 Notation Psquare_correct := Pos.square_spec (only parsing).
+#[deprecated(use=Z.square_spec, since="9.1")]
 Notation Zsquare_correct := Z.square_spec (only parsing).

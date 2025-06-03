@@ -107,8 +107,11 @@ From Stdlib Require Export ZArith.Zbitwise.
 From Stdlib Require Export ZArith.Zbool.
 From Stdlib Require Export ZArith.Zcompare.
 From Stdlib Require Export ZArith.Zcomplements.
+From Stdlib Require Export ZArith.Zcong.
+From Stdlib Require Export ZArith.Zdivisibility.
 From Stdlib Require Export ZArith.Zdiv.
 From Stdlib Require Export ZArith.Zdiv_facts.
+From Stdlib Require Export ZArith.ZModOffset.
 From Stdlib Require Export ZArith.Zeuclid.
 From Stdlib Require Export ZArith.Zeven.
 From Stdlib Require Export ZArith.Zgcd_alt.
@@ -455,6 +458,7 @@ From Stdlib Require Export Logic.Eqdep_dec.
 From Stdlib Require Export Logic.ExtensionalFunctionRepresentative.
 From Stdlib Require Export Logic.ExtensionalityFacts.
 From Stdlib Require Export Logic.FunctionalExtensionality.
+From Stdlib Require Export Logic.HLevelsBase.
 From Stdlib Require Export Logic.HLevels.
 From Stdlib Require Export Logic.Hurkens.
 From Stdlib Require Export Logic.IndefiniteDescription.
@@ -563,3 +567,11 @@ From Stdlib Require Export Arith.PeanoNat.
 From Stdlib Require Export Arith.Peano_dec.
 From Stdlib Require Export Arith.Wf_nat.
 From Stdlib Require Export Arith.Zerob.
+From Stdlib Require Export Zmod.Zmod.
+From Stdlib Require Export Zmod.ZmodDef.
+From Stdlib Require Export Zmod.ZmodBase.
+From Stdlib Require Export Zmod.ZmodInv.
+From Stdlib Require Export Zmod.Zstar.
+From Stdlib Require Export Zmod.ZstarDef.
+From Stdlib Require Export Zmod.ZstarBase.
+From Stdlib Require Export Zmod.Bits.

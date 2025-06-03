@@ -25,10 +25,11 @@ let
     "strings" = [ "arith" ];
     "lia" = [ "arith" "narith" ];
     "zarith" = [ "lia" ];
+    "zmod" = [ "zarith" "sorting" "field" ];
     "qarith-base" = [ "ring" ];
-    "field" = [ "qarith-base" "zarith" ];
-    "lqa" = [ "field" ];
-    "qarith" = [ "field" ];
+    "field" = [ "zarith" ];
+    "lqa" = [ "field" "qarith-base" ];
+    "qarith" = [ "lqa" ];
     "nsatz" = [ "zarith" "qarith-base" ];
     "classical-logic" = [ "arith" ];
     "sets" = [ "classical-logic" ];
@@ -40,14 +41,14 @@ let
     "primitive-floats" = [ "primitive-int" ];
     "primitive-array" = [ "primitive-int" ];
     "primitive-string" = [ "primitive-int" "orders-ex" ];
-    "reals" = [ "nsatz" "lqa" "qarith" "classical-logic" "vectors" ];
+    "reals" = [ "nsatz" "qarith" "classical-logic" "vectors" ];
     "fmaps-fsets-msets" = [ "orders-ex" "zarith" ];
     "extraction" = [ "primitive-string" "primitive-array" "primitive-floats" ];
     "funind" = [ "arith-base" ];
     "wellfounded" = [ "lists" ];
     "streams" = [ "logic" ];
     "rtauto" = [ "positive" "lists" ];
-    "compat" = [ "rtauto" "fmaps-fsets-msets" "funind" "extraction" "reals" "wellfounded" "streams" ];
+    "compat" = [ "rtauto" "fmaps-fsets-msets" "funind" "extraction" "reals" "zmod" "wellfounded" "streams" ];
     "all" = [ "compat" ];
   };
 
@@ -57,7 +58,6 @@ let
     in rocqPackages.lib.overrideRocqDerivation ({
       inherit pname;
       propagatedBuildInputs = stdlib-deps;
-      useDune = false;
       mlPlugin = true;
     } // {
       buildPhase = ''

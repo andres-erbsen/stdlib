@@ -34,6 +34,7 @@ through the <tt>From Stdlib Require Import</tt> command.</p>
     theories/Logic/ExtensionalityFacts.v
     theories/Logic/WeakFan.v
     theories/Logic/PropFacts.v
+    theories/Logic/HLevelsBase.v
     theories/Logic/HLevels.v
     theories/Logic/Adjointification.v
   </dd>
@@ -261,6 +262,8 @@ through the <tt>From Stdlib Require Import</tt> command.</p>
     theories/ZArith/Zpow_def.v
     theories/ZArith/Zdiv.v
     theories/ZArith/Znumtheory.v
+    theories/ZArith/Zdivisibility.v
+    theories/ZArith/Zcong.v
   </dd>
 
   <dt> <a name="arith"></a><b>Arith</b>:
@@ -291,6 +294,7 @@ through the <tt>From Stdlib Require Import</tt> command.</p>
     theories/ZArith/Zpow_facts.v
     theories/ZArith/Zdiv_facts.v
     theories/ZArith/Zbitwise.v
+    theories/ZArith/ZModOffset.v
     theories/Numbers/DecimalFacts.v
     theories/Numbers/DecimalNat.v
     theories/Numbers/DecimalPos.v
@@ -301,6 +305,22 @@ through the <tt>From Stdlib Require Import</tt> command.</p>
     theories/Numbers/HexadecimalPos.v
     theories/Numbers/HexadecimalN.v
     theories/Numbers/HexadecimalZ.v
+  </dd>
+
+  <dt> <a name="zmod"></a><b>Zmod and Zstar</b>:
+    Modular arithmetic -- integers modulo another integer -- including machine
+    words (bitvectors) and the multiplicative group of integers modulo another
+    integer.
+  </dt>
+  <dd>
+    theories/Zmod/Zmod.v
+    theories/Zmod/Bits.v
+    theories/Zmod/Zstar.v
+    (theories/Zmod/ZmodDef.v)
+    (theories/Zmod/ZstarDef.v)
+    (theories/Zmod/ZmodBase.v)
+    (theories/Zmod/ZstarBase.v)
+    (theories/Zmod/ZmodInv.v)
   </dd>
 
   <dt> <a name="unicode"></a><b>Unicode</b>:

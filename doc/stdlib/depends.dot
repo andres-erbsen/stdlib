@@ -15,12 +15,14 @@ digraph stdlib_deps {
 	strings -> arith;
 	reals -> qarith;
 	reals -> vectors;
-	reals -> lqa;
 	reals -> "classical-logic";
 	reals -> nsatz;
 	"arith-base" -> structures;
 	zarith -> lia;
-	qarith -> field;
+	zmod -> zarith;
+	zmod -> sorting;
+	zmod -> field;
+	qarith -> lqa;
 	positive -> "arith-base";
 	narith -> ring;
 	ring -> lists;
@@ -49,8 +51,8 @@ digraph stdlib_deps {
 	"primitive-string" -> "orders-ex";
 	vectors -> lists;
 	field -> zarith;
-	field -> "qarith-base";
 	lqa -> field;
+	lqa -> "qarith-base";
 	"qarith-base" -> ring;
 	"classical-logic" -> arith;
 	nsatz -> zarith;
@@ -63,6 +65,7 @@ digraph stdlib_deps {
 	funind -> "arith-base";
 	rtauto -> positive;
 	rtauto -> lists;
+	compat -> zmod;
 	compat -> reals;
 	compat -> "fmaps-fsets-msets";
 	compat -> wellfounded;
